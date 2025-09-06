@@ -6,58 +6,7 @@ import Header from "@/components/Header";
 import PropertyStats from "@/components/PropertyStats";
 import AreaInfo from "@/components/AreaInfo";
 import CommentsSection from "@/components/CommentsSection";
-import { Property } from "@/types/property";
-import property1 from "@/assets/property-1.jpg";
-import property2 from "@/assets/property-2.jpg";
-import property3 from "@/assets/property-3.jpg";
-
-const mockProperties: Property[] = [
-  {
-    id: "1",
-    title: "Modern Glass House with Mountain Views",
-    location: "Beverly Hills, CA",
-    price: 2850000,
-    bedrooms: 4,
-    bathrooms: 3,
-    sqft: 3200,
-    type: "Single Family",
-    image: property1,
-    description: "This stunning modern glass house offers breathtaking mountain views and contemporary design. Featuring floor-to-ceiling windows, an open-concept layout, and premium finishes throughout. The property includes a gourmet kitchen with top-of-the-line appliances, a master suite with panoramic views, and multiple outdoor entertaining spaces.",
-    features: ["Swimming Pool", "Home Theater", "Wine Cellar", "3-Car Garage", "Smart Home Technology", "Solar Panels"],
-    yearBuilt: 2019,
-    lotSize: "0.75 acres"
-  },
-  {
-    id: "2",
-    title: "Luxury Penthouse with City Skyline",
-    location: "Manhattan, NY",
-    price: 4200000,
-    bedrooms: 3,
-    bathrooms: 2,
-    sqft: 2800,
-    type: "Condo",
-    image: property2,
-    description: "Exceptional penthouse offering unparalleled city skyline views from every room. This luxurious residence features high-end finishes, a private elevator entrance, and a spacious terrace perfect for entertaining.",
-    features: ["Private Elevator", "Terrace", "Doorman", "Gym Access", "Rooftop Pool", "Concierge Service"],
-    yearBuilt: 2018,
-    lotSize: "N/A"
-  },
-  {
-    id: "3",
-    title: "Mediterranean Villa with Pool",
-    location: "Malibu, CA",
-    price: 3650000,
-    bedrooms: 5,
-    bathrooms: 4,
-    sqft: 4100,
-    type: "Villa",
-    image: property3,
-    description: "Exquisite Mediterranean villa set on a private hillside with ocean views. Features include a resort-style pool, outdoor kitchen, and beautifully landscaped gardens.",
-    features: ["Ocean Views", "Infinity Pool", "Outdoor Kitchen", "Wine Tasting Room", "Guest House", "Private Beach Access"],
-    yearBuilt: 2017,
-    lotSize: "1.2 acres"
-  }
-];
+import { mockProperties } from "@/data/mockProperties";
 
 const PropertyDetails = () => {
   const { id } = useParams();
