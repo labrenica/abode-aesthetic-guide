@@ -2,6 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Heart, MapPin, Bed, Bath, Square } from "lucide-react";
 import { Property } from "@/types/property";
+import { Link } from "react-router-dom";
 
 interface PropertyCardProps {
   property: Property;
@@ -57,9 +58,11 @@ const PropertyCard = ({ property, onFavorite }: PropertyCardProps) => {
         
         <div className="flex justify-between items-center">
           <span className="text-sm text-muted-foreground">{property.type}</span>
-          <Button variant="outline" size="sm" className="hover:bg-primary hover:text-primary-foreground transition-smooth">
-            View Details
-          </Button>
+          <Link to={`/property/${property.id}`}>
+            <Button variant="outline" size="sm" className="hover:bg-primary hover:text-primary-foreground transition-smooth">
+              View Details
+            </Button>
+          </Link>
         </div>
       </div>
     </Card>
