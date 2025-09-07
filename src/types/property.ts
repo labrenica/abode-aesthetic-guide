@@ -5,7 +5,7 @@ export interface Property {
   id: string;
   title: string;
   // New: slug for SEO/URLs
-  slug: string;
+  slug?: string;
 
   // Break down location
   address: string;
@@ -19,10 +19,10 @@ export interface Property {
   sqft: number;
 
   type: ListingType;
-  status: ListingStatus;
+  status?: ListingStatus;
 
   image?: string;      // keep for backwards compatibility
-  images: string[];    // gallery
+  images?: string[];    // gallery
 
   description?: string;
   features?: string[];
