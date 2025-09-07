@@ -8,7 +8,6 @@ export default function RootLayout() {
       <main className="flex-1 min-h-0">  {/* page content */}
         <Outlet />
       </main>
-      {/* <Footer /> optional */}
     </div>
   );
 }

@@ -79,20 +79,24 @@ export default function Listings() {
 
   return (
     <div className="flex flex-col h-[calc(100vh-64px)]"> {/* adjust header height if needed */}
-      <div className="p-3 border-b bg-white sticky top-0 z-10">
+      <div className="p-3 border-b bg-white sticky top-[64px] z-10">
         <FilterBar value={filters} onChange={setFilters} />
       </div>
 
       <div className="flex flex-1 min-h-0">
-        {/* Map (left) */}
-        <div className="w-1/2 border-r">
+        {/* Map (left) — wider */}
+        <div className="w-[62%] xl:w-[66%] border-r">
           <div className="h-full">
-            <MapView listings={listings} selectedId={selectedId} onSelect={setSelectedId} />
+            <MapView
+              listings={listings}
+              selectedId={selectedId}
+              onSelect={setSelectedId}
+            />
           </div>
         </div>
 
-        {/* Results (right) */}
-        <div className="w-1/2">
+        {/* Results (right) — fills remaining space */}
+        <div className="flex-1">
           {rightPane}
         </div>
       </div>
