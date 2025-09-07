@@ -55,7 +55,7 @@ export default function FilterBar({ value, onChange }: Props) {
   useEffect(() => onChange(next), [next, onChange]);
 
   return (
-    <div className="flex flex-wrap gap-2 items-end border rounded-lg p-3 bg-white">
+    <div className="flex flex-wrap gap-2 items-end border rounded-lg p-1 bg-white">
       <div className="flex flex-col">
         <label className="text-xs text-gray-500">Search</label>
         <input className="border rounded px-2 py-1" value={text} onChange={e => setText(e.target.value)} placeholder="Address, title…" />

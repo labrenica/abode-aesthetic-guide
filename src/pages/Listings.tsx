@@ -78,12 +78,12 @@ export default function Listings() {
   ), [listings, loading, err, selectedId]);
 
   return (
-    <div className="flex flex-col h-[calc(100vh-64px)]"> {/* adjust header height if needed */}
-      <div className="p-3 border-b bg-white sticky top-[64px] z-10">
+    <div className="grid h-[calc(100vh-64px)]" style={{ gridTemplateRows: "auto 1fr"}}> {/* adjust header height if needed */}
+      <div className="p-1 border-b bg-white sticky top-[64px] z-10">
         <FilterBar value={filters} onChange={setFilters} />
       </div>
 
-      <div className="flex flex-1 min-h-0">
+      <div className="flex flex-1 min-h-0 overflow-hidden">
         {/* Map (left) — wider */}
         <div className="w-[62%] xl:w-[66%] border-r">
           <div className="h-full">
@@ -96,8 +96,8 @@ export default function Listings() {
         </div>
 
         {/* Results (right) — fills remaining space */}
-        <div className="flex-1">
-          {rightPane}
+        <div className="flex-1 min-h-0">
+          {rightPane} {<div className="h-full overflow-y-auto p-3">…</div>} 
         </div>
       </div>
     </div>
