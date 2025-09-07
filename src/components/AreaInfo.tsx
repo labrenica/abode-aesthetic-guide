@@ -1,14 +1,20 @@
 import { Star, GraduationCap, Car, ShoppingBag, Hospital, Coffee } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import type { Property } from "@/types/property";
 
-interface AreaInfoProps {
-  location: string;
-}
+type AreaInfoProps = {
+  location: {
+    address: string;
+    city: string;
+    state: string;
+    zip: string;
+  };
+};
 
 const AreaInfo = ({ location }: AreaInfoProps) => {
   // Mock data based on location
-  const getAreaData = (location: string) => {
+  const getAreaData = (location: {city: string; state: string}) => {
     const baseData = {
       neighborhoodScore: 85,
       walkScore: 78,
@@ -31,14 +37,17 @@ const AreaInfo = ({ location }: AreaInfoProps) => {
       }
     };
 
-    if (location.includes("Beverly Hills")) {
+    const c= (location.city || "").toLowerCase();
+    const s= (location.state || "").toLowerCase();
+
+    if (c.includes("Beverly Hills")) {
       return {
         ...baseData,
         neighborhoodScore: 95,
         walkScore: 65,
         transitScore: 55,
       };
-    } else if (location.includes("Manhattan")) {
+    } else if (c.includes("Manhattan")) {
       return {
         ...baseData,
         neighborhoodScore: 92,
@@ -50,7 +59,7 @@ const AreaInfo = ({ location }: AreaInfoProps) => {
           congestionLevel: "Heavy"
         }
       };
-    } else if (location.includes("Malibu")) {
+    } else if (c.includes("Malibu")) {
       return {
         ...baseData,
         neighborhoodScore: 88,

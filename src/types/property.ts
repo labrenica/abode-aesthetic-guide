@@ -8,6 +8,12 @@ export interface Property {
   slug?: string;
 
   // Break down location
+  location: {
+    address: string;
+    city: string;
+    state: string;
+    zip: string;
+  };
   address: string;
   city: string;
   state: string;

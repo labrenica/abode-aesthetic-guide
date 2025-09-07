@@ -2,7 +2,6 @@ import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, Heart, Share, MapPin, Bed, Bath, Square, Calendar, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import Header from "@/components/Header";
 import PropertyStats from "@/components/PropertyStats";
 import AreaInfo from "@/components/AreaInfo";
 import CommentsSection from "@/components/CommentsSection";
@@ -15,7 +14,7 @@ const PropertyDetails = () => {
   if (!property) {
     return (
       <div className="min-h-screen bg-background">
-        <Header />
+        
         <div className="container mx-auto px-4 py-20 text-center">
           <h1 className="text-2xl font-bold mb-4">Property Not Found</h1>
           <Link to="/">
@@ -28,7 +27,6 @@ const PropertyDetails = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
       
       <main className="container mx-auto px-4 py-8">
         {/* Back Navigation */}
@@ -70,7 +68,7 @@ const PropertyDetails = () => {
               
               <div className="flex items-center text-muted-foreground mb-6">
                 <MapPin className="h-5 w-5 mr-2" />
-                <span className="text-lg">{property.location}</span>
+                <span className="text-lg">{property.city}</span>
               </div>
 
               <div className="flex items-center gap-6 mb-6">
@@ -126,7 +124,12 @@ const PropertyDetails = () => {
             <PropertyStats property={property} />
 
             {/* Area Information */}
-            <AreaInfo location={property.location} />
+            <AreaInfo location={{
+              address: property.address,
+              city: property.city,
+              state: property.state,
+              zip: property.zip
+            }} />
 
             {/* Comments Section */}
             <CommentsSection propertyId={property.id} />

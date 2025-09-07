@@ -5,7 +5,6 @@ import PropertyGrid from "@/components/PropertyGrid";
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
-      <Header />
       <main>
         <Hero />
         <PropertyGrid />
