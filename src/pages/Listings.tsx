@@ -26,41 +26,55 @@ export default function Listings() {
 
   const onCardHover = (id?: string) => setSelectedId(id ?? null);
 
-  const rightPane = useMemo(() => (
-    <div className="h-full overflow-y-auto p-3 space-y-3">
-      {loading && <div>Loading listings…</div>}
-      {err && <div className="text-red-600">Error: {err}</div>}
-      {!loading && !err && listings.length === 0 && <div>No results.</div>}
-      {listings.map(l => (
-        <Link
-          to={`/property/${l.id}`}
-          key={l.id}
-          onMouseEnter={() => onCardHover(l.id)}
-          onMouseLeave={() => onCardHover(undefined)}
-          className={`block border rounded-lg overflow-hidden hover:shadow transition ${
-            selectedId === l.id ? "ring-2 ring-blue-500" : ""
-          }`}
-        >
-          <img
-            src={(l as any).images?.[0] ?? (l as any).image}
-            alt={l.title}
-            className="w-full h-40 object-cover"
-          />
-          <div className="p-3">
-            <div className="font-medium">{l.title}</div>
-            <div className="text-sm text-gray-600">
-              {"address" in l
-                ? `${(l as any).address}, ${(l as any).city}, ${(l as any).state} ${(l as any).zip}`
-                : (l as any).location}
-            </div>
-            <div className="mt-1 font-semibold">${l.price.toLocaleString()}</div>
-            <div className="text-sm">
-              {l.bedrooms} bd · {l.bathrooms} ba · {l.sqft.toLocaleString()} sqft
-            </div>
+ const rightPane = useMemo(() => (
+  <div className="h-full overflow-y-auto p-3">
+    {loading && <div>Loading listings…</div>}
+    {err && <div className="text-red-600">Error: {err}</div>}
+
+    {!loading && !err && (
+      <div className="grid gap-3 grid-cols-1 md:grid-cols-2">
+        {listings.length === 0 && (
+          <div className="col-span-1 md:col-span-2 text-gray-600">
+            No results.
           </div>
-        </Link>
-      ))}
-    </div>
+        )}
+
+        {listings.map(l => (
+          <Link
+            to={`/property/${l.id}`}
+            key={l.id}
+            onMouseEnter={() => onCardHover(l.id)}
+            onMouseLeave={() => onCardHover(undefined)}
+            className={`border rounded-lg overflow-hidden hover:shadow transition ${
+              selectedId === l.id ? "ring-2 ring-blue-500" : ""
+            }`}
+          >
+            <article className="flex flex-col h-full">
+              <img
+                src={(l as any).images?.[0] ?? (l as any).image}
+                alt={l.title}
+                className="w-full h-40 object-cover"
+              />
+              <div className="p-3 flex-1 flex flex-col">
+                <div className="font-medium">{l.title}</div>
+                <div className="text-sm text-gray-600">
+                  {"address" in l
+                    ? `${(l as any).address}, ${(l as any).city}, ${(l as any).state} ${(l as any).zip}`
+                    : (l as any).location}
+                </div>
+                <div className="mt-1 font-semibold">
+                  ${l.price.toLocaleString()}
+                </div>
+                <div className="text-sm">
+                  {l.bedrooms} bd · {l.bathrooms} ba · {l.sqft.toLocaleString()} sqft
+                </div>
+              </div>
+            </article>
+          </Link>
+        ))}
+      </div>
+    )}
+  </div>
   ), [listings, loading, err, selectedId]);
 
   return (
