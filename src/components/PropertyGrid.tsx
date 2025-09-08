@@ -2,6 +2,8 @@ import { useEffect, useMemo, useState } from "react";
 import PropertyCard from "@/components/PropertyCard";
 import { Button } from "@/components/ui/button";
 import { mockProperties } from "@/data/mockProperties";
+import { Link } from "react-router-dom";
+import { ChevronRight } from "lucide-react"; // optional icon
 
 // If your properties have a different coords shape, adjust here.
 type Coords = { lat: number; lng: number };
@@ -30,6 +32,22 @@ const SCROLL_CONTAINER =
   "flex gap-4 overflow-x-auto py-2 -mx-4 px-4 md:-mx-0 md:px-0 snap-x snap-mandatory";
 const SCROLL_ITEM =
   "snap-start shrink-0 w-[280px] sm:w-[320px]";
+
+const SeeMoreTile = () => (
+  <div className={`${SCROLL_ITEM} flex items-center justify-center`}>
+    <Link to="/listings" className="block">
+      <Button
+        variant="outline"
+        size="lg"
+        className="inline-flex items-center gap-1 hover:bg-primary hover:text-primary-foreground transition-smooth"
+        aria-label="See more listings"
+      >
+        See more <ChevronRight className="h-4 w-4" />
+      </Button>
+    </Link>
+  </div>
+);
+
 
 const PropertyGrid = () => {
   // 1) Featured (cap at 9)
@@ -147,13 +165,15 @@ const PropertyGrid = () => {
                 <span className="text-sm text-muted-foreground">{geoError}</span>
               )}
             </div>
-            <div className={SCROLL_CONTAINER}>
-              {(nearby.length ? nearby : featured).map((p) => (
-                <div key={(p as any).id} className={SCROLL_ITEM}>
-                  <PropertyCard property={p} />
-                </div>
-              ))}
-            </div>
+             <div className={SCROLL_CONTAINER}>
+                {(nearby.length ? nearby : featured).map((p) => (
+                  <div key={(p as any).id} className={SCROLL_ITEM}>
+                    <PropertyCard property={p} />
+                  </div>
+                ))}
+                {/* See more tile */}
+                <SeeMoreTile />
+              </div>
           </div>
         )}
 
@@ -167,11 +187,13 @@ const PropertyGrid = () => {
               </span>
             </div>
             <div className={SCROLL_CONTAINER}>
-              {recent.map((p) => (
-                <div key={(p as any).id} className={SCROLL_ITEM}>
-                  <PropertyCard property={p} />
-                </div>
-              ))}
+                {recent.map((p) => (
+                  <div key={(p as any).id} className={SCROLL_ITEM}>
+                    <PropertyCard property={p} />
+                  </div>
+                ))}
+                {/* See more tile */}
+                <SeeMoreTile />
             </div>
           </div>
         )}
