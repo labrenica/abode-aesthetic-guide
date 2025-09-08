@@ -6,10 +6,29 @@ import PropertyStats from "@/components/PropertyStats";
 import AreaInfo from "@/components/AreaInfo";
 import CommentsSection from "@/components/CommentsSection";
 import { mockProperties } from "@/data/mockProperties";
+import { useEffect } from "react";
 
 const PropertyDetails = () => {
+
+  
   const { id } = useParams();
   const property = mockProperties.find(p => p.id === id);
+ 
+  useEffect(() => {
+    if (!property) return;              // guard if not found
+    const key = "recentlyViewed";       // keep this key in sync with PropertyGrid
+    try {
+      const raw = localStorage.getItem(key);
+      const arr: string[] = raw ? JSON.parse(raw) : [];
+      const thisId = String(property.id);
+      // put current id at the front, dedupe, and cap to 50
+      const next = [thisId, ...arr.filter((x) => x !== thisId)].slice(0, 50);
+      localStorage.setItem(key, JSON.stringify(next));
+    } catch {
+      // ignore storage errors (private mode, quota, etc.)
+    }
+  }, [property?.id]);
+  
 
   if (!property) {
     return (
