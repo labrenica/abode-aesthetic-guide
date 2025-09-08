@@ -38,7 +38,7 @@ const PropertyCard = ({ property, onFavorite }: PropertyCardProps) => {
         
         <div className="flex items-center text-muted-foreground mb-4">
           <MapPin className="h-4 w-4 mr-1" />
-          <span className="text-sm">{property.location}</span>
+          <span className="text-sm">{property.city}</span>
         </div>
         
         <div className="flex items-center justify-between text-sm text-muted-foreground mb-4">

@@ -3,8 +3,40 @@ import { Input } from "@/components/ui/input";
 import { Search, MapPin } from "lucide-react";
 import heroProperty from "@/assets/hero-property.jpg";
 
+// add these
+import { useState, FormEvent } from "react";
+import { useNavigate } from "react-router-dom";
+
+
+
+
+
 const Hero = () => {
-  return (
+  
+  const navigate = useNavigate();
+  
+  const [q, setQ] = useState("");
+
+  const isEmpty = q.trim() === "";
+  
+  const onSubmit = (e: FormEvent) => {
+  
+    e.preventDefault();
+  
+    const query = q.trim();
+    if (!query) return;            
+    const params = new URLSearchParams();
+    params.set("text", query);
+    navigate(`/listings?${params.toString()}`);
+  };
+
+const goQuick = (text: string) => {
+    const params = new URLSearchParams();
+    if (text) params.set("text", text);
+    navigate(`/listings?${params.toString()}`);
+  };
+  
+return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
@@ -32,25 +64,40 @@ const Hero = () => {
           
           {/* Search Form */}
           <div className="bg-card/90 backdrop-blur-sm p-6 rounded-2xl shadow-property-card">
-            <div className="flex flex-col md:flex-row gap-4">
+            <form onSubmit={onSubmit} className="flex flex-col md:flex-row gap-4">
               <div className="flex-1 relative">
-                <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" />
-                <Input 
-                  placeholder="Enter location, neighborhood, or ZIP code"
+                <span className="pointer-events-none absolute inset-y-0 left-3 flex items-center">
+                <MapPin className="h-5 w-5 text-muted-foreground" />
+                </span>
+                <Input
+                  placeholder= "Enter location, neighborhood, or ZIP code"
                   className="pl-10 h-12 border-0 bg-background"
+                  value={q}
+                  onChange={(e) => setQ(e.target.value)}
+                  autoComplete="off"
+                  inputMode="search"
                 />
               </div>
-              <Button size="lg" className="h-12 px-8 bg-hero-gradient hover:opacity-90 transition-smooth">
+              <Button type="submit" size="lg" className="h-12 px-8 bg-hero-gradient hover:opacity-90 transition-smooth">
                 <Search className="mr-2 h-5 w-5" />
                 Search Homes
               </Button>
-            </div>
+            </form>
             
             <div className="flex flex-wrap gap-4 mt-4 text-sm">
-              <button className="text-primary hover:underline">Popular: Downtown</button>
-              <button className="text-primary hover:underline">Luxury Condos</button>
-              <button className="text-primary hover:underline">Family Homes</button>
-              <button className="text-primary hover:underline">Waterfront</button>
+              <button className="text-primary hover:underline" onClick={() => goQuick("Downtown")}>
+                Popular: Downtown
+              </button>
+              <button className="text-primary hover:underline" onClick={() => goQuick("Luxury Condos")}>
+                Luxury Condos
+              </button>
+              <button className="text-primary hover:underline" onClick={() => goQuick("Family Homes")}>
+                Family Homes
+              </button>
+              <button className="text-primary hover:underline" onClick={() => goQuick("Waterfront")}>
+                Waterfront
+              </button>
+
             </div>
           </div>
         </div>

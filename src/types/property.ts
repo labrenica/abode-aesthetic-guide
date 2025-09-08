@@ -1,5 +1,5 @@
 export type ListingStatus = "active" | "pending" | "sold";
-export type ListingType = "house" | "condo" | "townhome" | "multi" | "land" | "other";
+export type ListingType = "house" | "condo" | "townhome" | "apartment" | "land" | "other";
 
 export interface Property {
   id: string;
